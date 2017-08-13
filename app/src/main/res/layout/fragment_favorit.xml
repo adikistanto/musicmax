@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/plyalist_title"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:paddingLeft="10dp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:id="@+id/play_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PLAY ALL"
+                android:layout_margin="10dp"
+                android:textColor="@color/colorAccent"
+                android:gravity="center_vertical"
+                />
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@+id/title"
+            android:id="@+id/track_list_view"
+            android:layout_width="match_parent"
+            android:minHeight="80dp"
+            android:paddingBottom="10dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/no_playlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Playlist is still empty"
+            android:layout_centerInParent="true"
+            android:layout_margin="30dp"/>
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>
