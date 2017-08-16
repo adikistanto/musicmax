@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.istandev.musicmax.SearchActivity"
+    tools:showIn="@layout/activity_search">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_vintage"/>
+
+    <ScrollView
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp">
+
+            <TextView
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search your all favorit music here"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:textColor="@color/white"
+                    android:id="@+id/key_search"
+                    android:hint="Search here"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:inputType="text"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:id="@+id/btn_cari"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:tint="@color/white"
+                    android:src="@drawable/ic_search_black_48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="or you can"
+                android:layout_gravity="center_horizontal"/>
+
+            <Button
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="20dp"
+                android:id="@+id/choose_button"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Choose Here"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:background="@drawable/bg_button_rouded"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:padding="0dp"
+        android:layout_margin="0dp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/progressbar"
+        android:foregroundTint="@color/white"
+        android:visibility="gone"
+        android:indeterminate="true"/>
+
+</RelativeLayout>

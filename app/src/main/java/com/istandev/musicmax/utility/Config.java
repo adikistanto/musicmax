@@ -1,4 +1,4 @@
-package com.istandev.musicmax;
+package com.istandev.musicmax.utility;
 
 /**
  * Created by ADIK on 08/06/2016.

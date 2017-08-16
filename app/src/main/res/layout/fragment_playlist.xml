@@ -3,21 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_vintage">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/track_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="200dp"/>
+
         <TextView
+            android:textColor="@color/white"
             android:id="@+id/no_playlist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="There is no playlist"
             android:layout_centerInParent="true"
             android:layout_margin="30dp"/>
+
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

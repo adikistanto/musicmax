@@ -1,5 +1,7 @@
 package com.istandev.musicmax;
 
+import com.istandev.musicmax.utility.Config;
+
 import retrofit.RestAdapter;
 
 /**

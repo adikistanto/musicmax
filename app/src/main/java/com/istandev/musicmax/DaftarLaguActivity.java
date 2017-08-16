@@ -14,7 +14,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,9 +28,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -40,14 +39,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.istandev.musicmax.entity.Track;
-import com.istandev.musicmax.utility.Constant;
+import com.istandev.musicmax.utility.Config;
 import com.istandev.musicmax.utility.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -70,7 +68,7 @@ public class DaftarLaguActivity extends AppCompatActivity implements Runnable,Mu
 
 
     private static final String TAG = "DaftarLaguActivity";
-    private static final String ADMOB_APP_ID = "ca-app-pub-4263804622117721~7574989894";
+    private static final String ADMOB_APP_ID = "ca-app-pub-3456079026845978~7648914959";
     private String linkAplikasi = "https://play.google.com/store/apps/details?id=com.istandev.musicmax";
     private String URL;
     public static String packageName;
@@ -118,6 +116,8 @@ public class DaftarLaguActivity extends AppCompatActivity implements Runnable,Mu
         getSupportActionBar().setTitle("MusicMax");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        MobileAds.initialize(this, ADMOB_APP_ID);
+
         mSelectedTrackTitle = (TextView)findViewById(R.id.selected_track_title);
         mSelectedTrackDuration = (TextView)findViewById(R.id.track_duration);
         mSelectedTrackSeekbar = (TextView)findViewById(R.id.seek_progress);
@@ -161,7 +161,11 @@ public class DaftarLaguActivity extends AppCompatActivity implements Runnable,Mu
                 if(isRepeat==false){
                     currentTrack = currentTrack + 1;
                 }
+                if(currentTrack >= mListItems.size()){
+                    currentTrack = currentTrack - 1;
+                }
                 Track track = mListItems.get(currentTrack);
+
                 showTrackAttribut(track.getTitle(),track.getArtworkURL(),track.getDuration(),DaftarLaguActivity.this);
                 idTrack = ""+track.getID();
                 judulTrack = track.getTitle();
@@ -182,15 +186,14 @@ public class DaftarLaguActivity extends AppCompatActivity implements Runnable,Mu
             }
         });
 
-       // AdView mAdView = (AdView) findViewById(R.id.adViewBanner);
+        mAdView = (AdView) findViewById(R.id.adViewBanner);
         if(Utils.isNetworkConnected(this)){
-            MobileAds.initialize(this, ADMOB_APP_ID);
             AdRequest adRequest = new AdRequest.Builder().build();
-            //mAdView.loadAd(adRequest);
+            mAdView.loadAd(adRequest);
             //new Utils.getStatusTask().execute();
         }else{
             Utils.showSettingsAlert(this);
-            //mAdView.setVisibility(View.GONE);
+            mAdView.setVisibility(View.GONE);
         }
 
         mPlayerControl.setOnClickListener(this);
@@ -530,21 +533,8 @@ public class DaftarLaguActivity extends AppCompatActivity implements Runnable,Mu
 
         if (id == R.id.action_search) {
             FragmentManager fm = getSupportFragmentManager();
-            FragmentCari myDialogFragment = new FragmentCari();
+            FragmentCari myDialogFragment = FragmentCari.newInstance(false);
             myDialogFragment.show(fm, "dialog_fragment");
-            return true;
-        }else if (id == R.id.action_info) {
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentInfo myDialogFragment = new FragmentInfo();
-            myDialogFragment.show(fm, "dialog_fragment");
-            return true;
-        }else if (id == R.id.action_rate) {
-            final String appPackageName = getPackageName();
-            try {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-            } catch (android.content.ActivityNotFoundException anfe) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-            }
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -572,6 +562,13 @@ public class DaftarLaguActivity extends AppCompatActivity implements Runnable,Mu
         Intent serviceIntent = new Intent(DaftarLaguActivity.this, NotificationService.class);
         serviceIntent.setAction(NotificationService.STOPFOREGROUND_ACTION);
         startService(serviceIntent);
+
+
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
+
     }
 
     @Override
@@ -744,7 +741,7 @@ public class DaftarLaguActivity extends AppCompatActivity implements Runnable,Mu
                 return false;
             }
         }
-        else { //permission is automatically granted on sdk<23 upon installation
+        else {
             Log.v(TAG,"Permission is granted");
             return true;
         }
@@ -819,7 +816,7 @@ public class DaftarLaguActivity extends AppCompatActivity implements Runnable,Mu
         @Override
         public Fragment getItem(int position) {
             if(position==0){
-                return FragmentLagu.newInstance(position);
+                return FragmentTracks.newInstance(position);
             }else if (position==1){
                 return FragmentPlaylist.newInstance(position);
 

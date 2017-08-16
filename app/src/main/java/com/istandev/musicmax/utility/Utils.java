@@ -1,28 +1,21 @@
 package com.istandev.musicmax.utility;
 
-import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 
 import com.istandev.musicmax.R;
 import com.istandev.musicmax.entity.Track;
 
-import org.apache.http.NameValuePair;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
 
@@ -220,4 +213,15 @@ public class Utils {
            return false;
         }
     }
+
+    public static void hideSoftKeyboard(Activity context){
+        if(context.getCurrentFocus() != null) {
+            InputMethodManager inputManager = (InputMethodManager)
+                    context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+
 }

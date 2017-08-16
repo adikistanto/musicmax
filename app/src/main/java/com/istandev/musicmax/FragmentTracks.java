@@ -30,7 +30,7 @@ import java.util.Comparator;
 /**
  * Created by ADIK on 24/08/2016.
  */
-public class FragmentLagu extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+public class FragmentTracks extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     private RecyclerView mRecyclerView;
@@ -42,11 +42,11 @@ public class FragmentLagu extends Fragment implements LoaderManager.LoaderCallba
     private ArrayList<Track> trackListWithAds = new ArrayList<Track>();
     private View view;
 
-    public FragmentLagu() {
+    public FragmentTracks() {
     }
 
-    public static FragmentLagu newInstance(int sectionNumber) {
-        FragmentLagu fragment = new FragmentLagu();
+    public static FragmentTracks newInstance(int sectionNumber) {
+        FragmentTracks fragment = new FragmentTracks();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
@@ -65,7 +65,7 @@ public class FragmentLagu extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_lagu, container, false);
+        view = inflater.inflate(R.layout.fragment_tracks, container, false);
 
         return view;
     }

@@ -7,22 +7,4 @@
         android:icon="@drawable/ic_search_white_48dp"
         app:showAsAction="always"
         android:title="Search"/>
-    <item
-        android:id="@+id/a_More"
-        android:icon="@drawable/ic_more_vert_white_48dp"
-        app:showAsAction="always"
-        android:title="More">
-        <menu>
-            <item
-                android:id="@+id/action_info"
-                android:icon="@drawable/ic_info_black_48dp"
-                app:showAsAction="never"
-                android:title="About"/>
-            <item
-                android:id="@+id/action_rate"
-                android:icon="@drawable/ic_star_black_48dp"
-                app:showAsAction="never"
-                android:title="Rate"/>
-        </menu>
-    </item>
 </menu>

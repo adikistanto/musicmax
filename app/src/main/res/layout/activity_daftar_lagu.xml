@@ -209,7 +209,7 @@
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
-            <!--<com.google.android.gms.ads.AdView
+            <com.google.android.gms.ads.AdView
                 android:id="@+id/adViewBanner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -218,7 +218,7 @@
                 android:layout_marginTop="5dp"
                 ads:adSize="BANNER"
                 ads:adUnitId="@string/banner_home_footer">
-            </com.google.android.gms.ads.AdView>-->
+            </com.google.android.gms.ads.AdView>
         </LinearLayout>
 
     </android.support.v7.widget.Toolbar>

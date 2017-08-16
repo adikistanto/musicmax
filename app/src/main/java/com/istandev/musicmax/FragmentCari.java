@@ -1,6 +1,7 @@
 package com.istandev.musicmax;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.KeyEvent;
@@ -12,7 +13,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.istandev.musicmax.entity.Track;
 
@@ -35,9 +35,18 @@ public class FragmentCari extends DialogFragment implements MusikuService,View.O
 
     private Context context;
     private EditText cari;
+    Boolean isHome;
 
 
     public FragmentCari() {
+    }
+
+    public static FragmentCari newInstance(Boolean isHome) {
+        FragmentCari fragment = new FragmentCari();
+        Bundle args = new Bundle();
+        args.putBoolean("key", isHome);
+        fragment.setArguments(args);
+        return fragment;
     }
 
 
@@ -50,6 +59,14 @@ public class FragmentCari extends DialogFragment implements MusikuService,View.O
         context = getActivity();
 
         ImageView btnCari = (ImageView) view.findViewById(R.id.btn_cari);
+
+        isHome = getArguments().getBoolean("key");
+
+        if(isHome){
+            cari.setVisibility(View.GONE);
+            btnCari.setVisibility(View.GONE);
+        }
+
         TextView a = (TextView) view.findViewById(R.id.alternativerock);
         TextView b = (TextView) view.findViewById(R.id.ambient);
         TextView c = (TextView) view.findViewById(R.id.clasical);
@@ -304,22 +321,48 @@ public class FragmentCari extends DialogFragment implements MusikuService,View.O
     }
 
     private void serchByGenre(String genre){
-        progressBar.setVisibility(View.VISIBLE);
-        getDialog().cancel();
-        tab = tabLayout.getTabAt(0);
-        tab.select();
-        MusikuService scService = SoundCloud.getService();
-        scService.getGenreTracks(genre,50,new Callback<ArrayList<Track>>() {
-            @Override
-            public void success(ArrayList<Track> tracks, Response response) {
-                loadTracks(tracks,context);
-            }
 
-            @Override
-            public void failure(RetrofitError error) {
-                //Toast.makeText(getActivity(),"Can't find any tracks",Toast.LENGTH_SHORT).show();
-            }
-        });
+        if(isHome){
+
+            SearchActivity.progressBar.setVisibility(View.VISIBLE);
+            getDialog().cancel();
+            //tab = tabLayout.getTabAt(0);
+            //tab.select();
+            MusikuService scService = SoundCloud.getService();
+            scService.getGenreTracks(genre,50,new Callback<ArrayList<Track>>() {
+                @Override
+                public void success(ArrayList<Track> tracks, Response response) {
+                    loadTracks(tracks,context);
+
+                    Intent i = new Intent(context, DaftarLaguActivity.class);
+                    context.startActivity(i);
+
+                    SearchActivity.progressBar.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    //Toast.makeText(getActivity(),"Can't find any tracks",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else {
+            progressBar.setVisibility(View.VISIBLE);
+            getDialog().cancel();
+            tab = tabLayout.getTabAt(0);
+            tab.select();
+            MusikuService scService = SoundCloud.getService();
+            scService.getGenreTracks(genre,50,new Callback<ArrayList<Track>>() {
+                @Override
+                public void success(ArrayList<Track> tracks, Response response) {
+                    loadTracks(tracks,context);
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    //Toast.makeText(getActivity(),"Can't find any tracks",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
 

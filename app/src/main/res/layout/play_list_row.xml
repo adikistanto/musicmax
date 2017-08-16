@@ -7,7 +7,7 @@
     android:layout_marginLeft="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginRight="5dp"
-    android:background="@color/white">
+    android:background="@color/colorPrimary_25">
     <LinearLayout
         android:padding="10dp"
         android:layout_width="match_parent"
@@ -32,6 +32,7 @@
             android:layout_gravity="top">
 
             <TextView
+                android:textColor="@color/white"
                 android:id="@+id/track_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,6 +48,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:textColor="@color/white"
                     android:id="@+id/track_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

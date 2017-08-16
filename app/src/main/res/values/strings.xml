@@ -17,13 +17,14 @@
 
     <string name="content_authority">com.istandev.musicmax</string>
 
-    <string name="banner_home_footer">ca-app-pub-4263804622117721/9051723091</string>
+    <string name="banner_home_footer">ca-app-pub-3456079026845978/8884995065</string>
     <string name="interstitial_full_screen">ca-app-pub-4263804622117721/5958655894</string>
     <string name="nativ_ad_unit_id">ca-app-pub-4263804622117721/8912122298</string>
     <string name="nativ_ad_unit_id1">ca-app-pub-4263804622117721/1388855491</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_search">SearchActivity</string>
 
 
 </resources>

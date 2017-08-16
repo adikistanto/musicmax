@@ -1,13 +1,13 @@
 package com.istandev.musicmax;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.istandev.musicmax.entity.Track;
-import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +27,9 @@ public class SplashScreen extends AppCompatActivity implements MusikuService{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+
         MusikuService scService = SoundCloud.getService();
         scService.getRecentTracks(new SimpleDateFormat("yyyy-MM-dd").format(new Date()),50, new Callback<ArrayList<Track>>() {
             @Override
@@ -44,7 +47,7 @@ public class SplashScreen extends AppCompatActivity implements MusikuService{
 
             @Override
             public void run() {
-                Intent i = new Intent(SplashScreen.this, DaftarLaguActivity.class);
+                Intent i = new Intent(SplashScreen.this, SearchActivity.class);
                 startActivity(i);
 
                 finish();
